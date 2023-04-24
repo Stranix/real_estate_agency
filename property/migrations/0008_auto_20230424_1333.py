@@ -5,7 +5,7 @@ from django.db import migrations
 
 def fill_flat_owner_pure_phone(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         phone_number = phonenumbers.parse(flat.owners_phonenumber, 'RU')
         flat.owner_pure_phone = None
         if phonenumbers.is_valid_number(phone_number):
