@@ -3,6 +3,11 @@ from django.contrib import admin
 from .models import Flat, Complaint, Owner
 
 
+class OwnersFlatsInLine(admin.TabularInline):
+    model = Owner.flats.through
+    raw_id_fields = ('flat', 'owner')
+
+
 class FlatAdmin(admin.ModelAdmin):
     search_fields = (
         'town',
@@ -18,6 +23,7 @@ class FlatAdmin(admin.ModelAdmin):
         'construction_year',
         'town'
     )
+    inlines = [OwnersFlatsInLine]
     list_filter = (
         'new_building',
         'rooms_number',
