@@ -21,6 +21,7 @@ class FlatAdmin(admin.ModelAdmin):
         'rooms_number',
         'has_balcony',
     )
+    raw_id_fields = ('like_by',)
     list_editable = ('new_building',)
     readonly_fields = ('created_at',)
 
